@@ -1,0 +1,22 @@
+{
+  "id": "em-induktion",
+  "title": "Elektromagnetische Induktion (EMI)",
+  "category": "geophysik",
+  "impact": 3,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Ein Gerät erzeugt ein elektromagnetisches Feld und misst die Leitfähigkeit des Bodens berührungslos – ohne Elektroden einzustecken. Liefert gleichzeitig Leitfähigkeit und magnetische Suszeptibilität, ist schnell begehbar.",
+  "how_new_finds": "Schnelles Screening großer Flächen wie Magnetometrie, aber empfindlich für andere Kontraste (feuchte Gruben, verfüllte Gräben). Guter erster Übersichts-Scan zur Priorisierung.",
+  "how_to": [
+    "Gerät (z.B. Multi-Spulen-EMI) im Raster über die Fläche tragen oder ziehen.",
+    "Karten für mehrere Tiefenbereiche gleichzeitig erzeugen.",
+    "Kein Bodenkontakt nötig – auch bei trockenem Boden nutzbar, wo Geoelektrik schwächelt."
+  ],
+  "examples": [
+    "Verfüllte Gräben und Paläokanäle in Flussauen kartiert.",
+    "Vorabkartierung großer Siedlungsareale zur Grabungsplanung."
+  ],
+  "combos": ["Magnetometrie", "Geoelektrik / ERT"],
+  "limits": "Geringere Detailauflösung als GPR; stark gestört durch Metall/Zäune; Kalibrierung sensibel.",
+  "cost": "Mittel; als Ergänzung sinnvoll."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "luftbild-cropmarks",
+  "title": "Luftbildarchäologie (Bewuchs- & Bodenmerkmale)",
+  "category": "fernerkundung",
+  "impact": 4,
+  "effort": 1,
+  "evidence_level": "A",
+  "what": "Über vergrabenen Gräben wächst Getreide höher und grüner, über Mauern kümmert es – das zeichnet in Trockenperioden ganze Grundrisse in die Felder ('Cropmarks'). Auch Schatten bei tiefem Sonnenstand und Bodenverfärbungen verraten Strukturen aus der Luft.",
+  "how_new_finds": "Klassiker mit riesigem Hebel: allein durch Sichten vorhandener Luft-/Drohnenbilder zur richtigen Jahreszeit werden laufend neue Fundplätze entdeckt – fast ohne Materialkosten.",
+  "how_to": [
+    "Historische und aktuelle Luftbilder sowie Google/Bing-Satellit systematisch nach geometrischen Mustern durchsehen.",
+    "Nach Trockenperioden im Hoch-/Spätsommer selbst mit Drohne fliegen (bester Cropmark-Kontrast).",
+    "Schrägaufnahmen bei niedriger Sonne für Schattenmerkmale nutzen."
+  ],
+  "examples": [
+    "Zahlreiche römische Villen und keltische Viereckschanzen als Cropmarks in England/Deutschland.",
+    "Im Hitzesommer 2018 europaweit hunderte neue Anlagen sichtbar geworden."
+  ],
+  "combos": ["Satelliten-Fernerkundung", "LiDAR", "Magnetometrie"],
+  "limits": "Nur sichtbar bei passender Frucht, Trockenheit und Jahreszeit; Grünland/Wald zeigt nichts; braucht geübtes Auge.",
+  "cost": "Sehr niedrig: Bilder oft gratis, Einsteiger-Drohne genügt."
+}

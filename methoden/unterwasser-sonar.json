@@ -1,0 +1,22 @@
+{
+  "id": "unterwasser-sonar",
+  "title": "Unterwasser-Prospektion (Side-Scan-Sonar & Sub-Bottom)",
+  "category": "labor",
+  "impact": 4,
+  "effort": 4,
+  "evidence_level": "A",
+  "what": "Seiten-Sichtsonar tastet den Gewässergrund ab und bildet Wracks und Strukturen als Schattenrelief ab; Sub-Bottom-Profiler und Magnetometer finden Verschüttetes im Sediment. Plus Bathymetrie-LiDAR für flache Küsten.",
+  "how_new_finds": "Zwei Drittel der Erde sind Wasser und archäologisch kaum erschlossen – hier liegen noch riesige unentdeckte Bestände (Wracks, versunkene Siedlungen, gefluteten Steinzeitlandschaften wie 'Doggerland').",
+  "how_to": [
+    "Suchgebiet in Bahnen mit geschlepptem Side-Scan-Sonar abfahren.",
+    "Magnetometer für Metall/Wracks und Sub-Bottom-Profiler für Verschüttetes ergänzen.",
+    "Kontakte per Tauchgang oder ROV verifizieren."
+  ],
+  "examples": [
+    "Endurance (Shackletons Schiff) 2022 per ROV/Sonar in der Antarktis gefunden.",
+    "Versunkene steinzeitliche Landschaften der Nordsee ('Doggerland') kartiert."
+  ],
+  "combos": ["Magnetometrie", "Predictive Modelling (GIS)"],
+  "limits": "Bootszeit teuer; Sicht/Strömung; Verifikation aufwändig; Genehmigungen.",
+  "cost": "Hoch: Boot, Sonar, Tauch-/ROV-Einsatz."
+}

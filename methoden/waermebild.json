@@ -1,0 +1,21 @@
+{
+  "id": "waermebild",
+  "title": "Wärmebild-Prospektion (Thermal)",
+  "category": "fernerkundung",
+  "impact": 2,
+  "effort": 2,
+  "evidence_level": "B",
+  "what": "Vergrabene Steinmauern speichern und geben Wärme anders ab als der umgebende Boden. Eine Wärmebildkamera (per Drohne, früh morgens oder abends) macht diese Temperaturunterschiede sichtbar.",
+  "how_new_finds": "Ergänzt Cropmark-Fenster: zeigt Strukturen auch dann, wenn Bewuchsmerkmale gerade fehlen – vor allem in der kurzen Auf-/Abkühlphase des Tages.",
+  "how_to": [
+    "Drohnen-Wärmebildflug im Zeitfenster größter Temperaturdifferenz (kurz nach Sonnenauf-/-untergang).",
+    "Über mehrere Überflüge mitteln, um Rauschen zu senken.",
+    "Auffällige lineare/rechteckige Wärmemuster mit anderen Methoden gegenprüfen."
+  ],
+  "examples": [
+    "Vergrabene Mauern und Wege in Testflächen thermisch nachgewiesen (u.a. Studien in den USA/Europa)."
+  ],
+  "combos": ["Drohnen-Photogrammetrie", "Luftbildarchäologie (Cropmarks)"],
+  "limits": "Stark wetter-/tageszeitabhängig; niedrige Trefferquote allein; eher bestätigend als entdeckend.",
+  "cost": "Niedrig–mittel (Wärmekamera für Drohne)."
+}

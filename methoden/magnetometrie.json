@@ -1,0 +1,23 @@
+{
+  "id": "magnetometrie",
+  "title": "Magnetometrie (Magnetik-Prospektion)",
+  "category": "geophysik",
+  "impact": 5,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Hochempfindliche Magnetsensoren messen winzige Störungen im Erdmagnetfeld. Feuerstellen, Brennöfen, verfüllte Gruben und gebrannter Lehm sind magnetisch verändert und heben sich klar ab. Sehr schnell begehbar – oft mehrere Hektar pro Tag.",
+  "how_new_finds": "Der schnellste Weg, große Flächen nach vergrabenen Siedlungen, Gräben und Öfen abzusuchen. Deckt komplette Siedlungsgrundrisse auf, ohne einen Spaten anzusetzen – top Aufwand-Nutzen-Verhältnis.",
+  "how_to": [
+    "Fluxgate- oder Cäsium-Gradiometer im engen Raster (0,25–0,5 m Linien) über das Feld tragen/fahren.",
+    "GPS/RTK zur genauen Verortung mitloggen.",
+    "Daten als Graustufen-Magnetogramm darstellen; Anomalien interpretieren.",
+    "Beste Ergebnisse auf abgeerntetem/gepflügtem Feld ohne moderne Eisenteile."
+  ],
+  "examples": [
+    "Kreisgrabenanlagen der Jungsteinzeit (z.B. Goseck) flächig entdeckt.",
+    "Römische Marschlager und Kastelle über Grabenverfärbungen kartiert."
+  ],
+  "combos": ["Geoelektrik / ERT", "LiDAR", "Luftbildarchäologie (Cropmarks)"],
+  "limits": "Findet keine reinen Steinmauern gut (kaum magnetisch); gestört durch Zäune, Leitungen, Bebauung; sagt nichts über Tiefe/Alter.",
+  "cost": "Mittel–hoch beim Gerät, aber sehr niedrige Kosten pro Fläche – daher hoher Hebel."
+}

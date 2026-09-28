@@ -1,0 +1,23 @@
+{
+  "id": "htr-alte-handschriften",
+  "title": "KI-Handschriftenerkennung (HTR) für alte Texte",
+  "category": "ki_texte",
+  "impact": 4,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Handwriting Text Recognition (z.B. Transkribus, eScriptorium) liest handgeschriebene historische Dokumente automatisch. So werden Massen an Urkunden, Chroniken und Verwaltungsakten durchsuchbar, die bisher niemand transkribiert hat.",
+  "how_new_finds": "In alten Texten stecken direkte Hinweise auf verschwundene Orte, Klöster, Burgen und Wüstungen. Wer sie durchsuchbar macht, findet Ortsangaben, die man dann im Gelände oder per Fernerkundung aufsucht – 'alte Texte mit KI durchsuchen'.",
+  "how_to": [
+    "Digitalisate aus Archiven besorgen (viele Landesarchive stellen Scans offen bereit).",
+    "HTR-Modell trainieren/nutzen (Transkribus bietet fertige Modelle je Schriftepoche).",
+    "Volltext indexieren und gezielt nach Orts-, Flur- und Gewässernamen suchen.",
+    "Treffer geografisch verorten und mit Karten/LiDAR abgleichen."
+  ],
+  "examples": [
+    "Massentranskription mittelalterlicher Urkunden macht Nennungen untergegangener Dörfer auffindbar.",
+    "Kloster- und Grundbücher liefern Lagehinweise auf abgegangene Siedlungen (Wüstungen)."
+  ],
+  "combos": ["KI-Ortsnamen-Extraktion (NER)", "Alte Karten georeferenzieren", "LiDAR"],
+  "limits": "Modelle brauchen Trainingsmaterial je Schrift/Sprache; OCR-Fehler; Ortszuordnung oft mehrdeutig.",
+  "cost": "Niedrig: Tools teils gratis/akademisch, Hauptaufwand ist Zeit."
+}

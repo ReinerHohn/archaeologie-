@@ -1,0 +1,22 @@
+{
+  "id": "citizen-science",
+  "title": "Citizen Science & gemeldete Zufallsfunde (PAS-Prinzip)",
+  "category": "modellierung",
+  "impact": 4,
+  "effort": 1,
+  "evidence_level": "A",
+  "what": "Viele Augen finden mehr: Systematisch erfasste Zufalls- und Detektorfunde von Bürgern (Vorbild: das englische Portable Antiquities Scheme) sowie Crowdsourcing-Plattformen, auf denen Freiwillige Satelliten-/LiDAR-Kacheln nach Strukturen absuchen.",
+  "how_new_finds": "Multipliziert die Suchfläche enorm zu geringen Kosten. Gemeldete Streufunde zeigen unbekannte Fundplätze; Crowd-Sichtung deckt Anomalien auf, die Fachleute nie alle durchsehen könnten.",
+  "how_to": [
+    "Melde-/Erfassungsweg schaffen (Fundmeldung mit GPS, Foto, Kontext) – legal und mit Behörden abgestimmt.",
+    "Freiwillige über Plattform Bildkacheln markieren lassen; mehrfache Bestätigung als Filter.",
+    "Meldungen in eine Fundkarte überführen und Cluster fachlich nachprüfen."
+  ],
+  "examples": [
+    "PAS (England/Wales): über eine Million gemeldeter Funde, viele neue Fundstellen.",
+    "GlobalXplorer/Crowd-Kampagnen zur Satellitensichtung großer Regionen."
+  ],
+  "combos": ["KI-Bildklassifikation", "Predictive Modelling (GIS)", "Metalldetektion"],
+  "limits": "Rechtslage je Land streng (Sondeln oft genehmigungspflichtig!); Datenqualität schwankt; Kontext geht bei unsachgemäßer Bergung verloren.",
+  "cost": "Sehr niedrig; Hauptaufwand ist Organisation + Qualitätssicherung."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "satellit-multispektral",
+  "title": "Satelliten- & Multispektral-Fernerkundung",
+  "category": "fernerkundung",
+  "impact": 4,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Satellitenbilder in mehreren Wellenlängen (auch Infrarot) zeigen feine Unterschiede in Boden, Feuchte und Bewuchs, die für das Auge unsichtbar sind. 'Space Archaeology' wertet diese systematisch aus, um vergrabene Strukturen zu erahnen.",
+  "how_new_finds": "Ermöglicht großflächige Suche über ganze Regionen und Länder vom Schreibtisch aus – ideal, um Kandidaten für gezielte Feldbesuche zu erzeugen, auch in unzugänglichen Gebieten.",
+  "how_to": [
+    "Freie Daten nutzen: Sentinel-2 (ESA), Landsat (USGS), teils Google Earth Historie.",
+    "Vegetationsindizes (NDVI) und Falschfarben rechnen, um Bewuchs-/Feuchtemuster zu betonen.",
+    "Geometrische Anomalien (Rechtecke, Kreise, Linien) als Fundplatz-Kandidaten markieren."
+  ],
+  "examples": [
+    "Sarah Parcaks Auswertungen zu verschütteten Siedlungen und Gräbern in Ägypten.",
+    "Verschüttete Flussläufe und Karawanenstraßen in Wüstenregionen entdeckt."
+  ],
+  "combos": ["LiDAR", "Luftbildarchäologie (Cropmarks)", "KI-Bildklassifikation"],
+  "limits": "Auflösung begrenzt (frei ~10 m/Pixel); viele Fehlalarme; hochauflösende kommerzielle Bilder kosten.",
+  "cost": "Niedrig mit freien Daten; hoch bei kommerziellen Hochauflösern."
+}

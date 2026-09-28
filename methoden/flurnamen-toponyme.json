@@ -1,0 +1,22 @@
+{
+  "id": "flurnamen-toponyme",
+  "title": "Flurnamen- & Toponym-Analyse",
+  "category": "modellierung",
+  "impact": 3,
+  "effort": 1,
+  "evidence_level": "B",
+  "what": "Alte Flur-, Gewann- und Ortsnamen bewahren Erinnerung an Verschwundenes: Namen mit 'Burgstall', 'Kirchacker', 'Heidenmauer', 'Galgenberg', 'Wüstung', '-hausen' verweisen oft auf konkrete, längst überackerte Fundstellen.",
+  "how_new_finds": "Extrem billiger Hinweisgeber: Ein Blick in Flurnamenkarten liefert vielversprechende Punkte, die man dann per LiDAR, Luftbild oder Begehung prüft. Klassisches Low-Hanging-Fruit.",
+  "how_to": [
+    "Historische Flurnamen aus Katastern/Flurnamenbüchern und Kartenportalen sammeln.",
+    "Nach verräterischen Namensbestandteilen filtern (Burg, Kirche, Wüst, Heiden, Galgen…).",
+    "Kandidaten geolokalisieren und mit LiDAR/Luftbild/Begehung gegenprüfen."
+  ],
+  "examples": [
+    "'Burgstall'-Flurnamen führen regelmäßig zu abgegangenen Burgen/Turmhügeln.",
+    "Wüstungsnamen markieren aufgelassene mittelalterliche Dörfer."
+  ],
+  "combos": ["KI-Ortsnamen-Extraktion (NER)", "Alte Karten georeferenzieren", "LiDAR"],
+  "limits": "Namen wandern und täuschen; nicht jeder Hinweis stimmt; regional sehr unterschiedlich dokumentiert.",
+  "cost": "Sehr niedrig: Namensmaterial oft frei verfügbar."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "tote-sprachen-ki",
+  "title": "KI-Entzifferung & -Übersetzung alter Schriften",
+  "category": "ki_texte",
+  "impact": 3,
+  "effort": 3,
+  "evidence_level": "B",
+  "what": "Maschinelles Lernen hilft, schlecht lesbare oder wenig verstandene Schriften zu entziffern – von beschädigten Keilschrifttafeln bis zu verkohlten Papyri, die per CT gescannt und per KI 'virtuell entrollt' und gelesen werden.",
+  "how_new_finds": "Öffnet riesige, bislang stumme Textbestände: unlesbare Tafeln, ungeöffnete Schriftrollen und Fragmente werden zugänglich – und liefern neue historische Fakten und Ortsangaben.",
+  "how_to": [
+    "Digitalisate/Scans beschaffen (Foto, RTI, oder CT bei verkohlten Rollen).",
+    "KI zur Zeichensegmentierung, Ergänzung und (teil-)Übersetzung einsetzen.",
+    "Ergebnisse philologisch verifizieren und quellenkritisch einordnen."
+  ],
+  "examples": [
+    "Vesuvius Challenge: KI liest verkohlte Herculaneum-Papyri berührungslos aus CT-Scans.",
+    "ML-Ansätze zur Zusammensetzung und Lesung fragmentierter Keilschrifttafeln."
+  ],
+  "combos": ["KI für Inschriften (Ithaca)", "KI-Handschriftenerkennung (HTR)"],
+  "limits": "Sehr datenhungrig; für schlecht belegte Sprachen unsicher; Ergebnisse müssen belegt widerlegbar sein.",
+  "cost": "Mittel: Scantechnik (CT) teuer, KI-Teil oft offen."
+}

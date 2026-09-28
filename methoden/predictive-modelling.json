@@ -1,0 +1,22 @@
+{
+  "id": "predictive-modelling",
+  "title": "Prädiktive Fundort-Modellierung (GIS & ML)",
+  "category": "modellierung",
+  "impact": 5,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Man verknüpft bekannte Fundstellen mit Umweltdaten (Hangneigung, Wassernähe, Bodengüte, Sonnenlage) und lernt daraus ein Modell, das Wahrscheinlichkeitskarten erzeugt: Wo hätten Menschen früher gesiedelt? Zunehmend mit Machine Learning.",
+  "how_new_finds": "Fokussiert knappe Feld- und Grabungsressourcen auf die aussichtsreichsten Flächen. Statt blind zu suchen, arbeitet man die Hotspots der Karte ab – riesiger Hebel bei reiner Schreibtischarbeit.",
+  "how_to": [
+    "Bekannte Fundpunkte + Umwelt-Layer (Höhe, Gewässer, Boden, Exposition) in GIS laden.",
+    "Modell trainieren (von einfacher Gewichtung bis Random Forest) und Wahrscheinlichkeitskarte erzeugen.",
+    "Gegen zurückgehaltene Fundorte validieren, dann Top-Zonen im Feld prüfen."
+  ],
+  "examples": [
+    "Behördliche Fundstellen-Erwartungskarten steuern Bauvorsorge und Surveys.",
+    "ML-Modelle sagen Grabhügel-/Siedlungslagen erfolgreich vorher."
+  ],
+  "combos": ["LiDAR", "KI-Ortsnamen-Extraktion (NER)", "Magnetometrie"],
+  "limits": "Lernt Verzerrung der bekannten Funde mit (bereits abgesuchte Gegenden); braucht saubere Daten; nur Wahrscheinlichkeit, kein Beweis.",
+  "cost": "Sehr niedrig: QGIS/Python frei, Daten oft offen."
+}

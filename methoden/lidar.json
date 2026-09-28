@@ -1,0 +1,23 @@
+{
+  "id": "lidar",
+  "title": "LiDAR / Airborne Laser Scanning",
+  "category": "fernerkundung",
+  "impact": 5,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Laser-Scanner aus Flugzeug oder Drohne tasten den Boden ab. Rechnet man die Vegetation heraus (Digitales Geländemodell), werden winzige Reliefreste sichtbar: Wälle, Terrassen, Hohlwege, Gebäudeplattformen – selbst unter dichtem Wald.",
+  "how_new_finds": "Der größte Umbruch der letzten 20 Jahre: ganze verlorene Städte und Landschaften erscheinen unter Regenwald und Wald. Oft reicht das AUSWERTEN bereits frei verfügbarer LiDAR-Höhendaten – kein eigener Flug nötig.",
+  "how_to": [
+    "Freie/offene LiDAR-DGM-Daten der Landesvermessung herunterladen (viele Bundesländer/Länder bieten sie offen an).",
+    "Hillshade, Local Relief Model oder Sky-View-Factor rechnen, um Mikrorelief zu betonen.",
+    "Auffällige geometrische Formen (rund/rechteckig) als Kandidaten markieren und im Gelände prüfen."
+  ],
+  "examples": [
+    "Tausende Maya-Strukturen unter dem Regenwald von Guatemala (PACUNAM-LiDAR 2018).",
+    "Ausdehnung von Angkor (Kambodscha) massiv erweitert.",
+    "Keltische und mittelalterliche Wallanlagen in europäischen Wäldern neu entdeckt."
+  ],
+  "combos": ["Luftbildarchäologie (Cropmarks)", "Predictive Modelling (GIS)", "Magnetometrie"],
+  "limits": "Findet nur, was noch Relief hat (eingeebnete Äcker zeigen wenig); Auswertung braucht GIS-Kenntnis; Rohbefliegung teuer.",
+  "cost": "Sehr niedrig, wenn offene Landesdaten genutzt werden – daher Spitzen-Hebel."
+}

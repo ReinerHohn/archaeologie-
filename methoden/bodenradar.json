@@ -1,0 +1,22 @@
+{
+  "id": "bodenradar",
+  "title": "Bodenradar (GPR – Ground Penetrating Radar)",
+  "category": "geophysik",
+  "impact": 4,
+  "effort": 3,
+  "evidence_level": "A",
+  "what": "Ein Antennenschlitten sendet Radarimpulse in den Boden; Reflexionen an Schichtgrenzen und Objekten werden aufgezeichnet. Liefert echte 3D-Tiefenschnitte und kann einzelne Strukturen in verschiedenen Tiefen trennen.",
+  "how_new_finds": "Zeigt Mauern, Fußböden, Grüfte, Hohlräume und Gräber tiefenaufgelöst – auch unter modernen Böden, Kirchen oder Plätzen, wo Grabung unmöglich ist.",
+  "how_to": [
+    "Antenne (Frequenz je nach Zieltiefe: 250–500 MHz Standard) in engen Parallelbahnen ziehen.",
+    "Daten zu 'Time-Slices' (Tiefenscheiben) verrechnen für Draufsicht je Tiefe.",
+    "Auf befestigten Flächen (Asphalt, Fliesen) einsetzbar – Vorteil ggü. Geoelektrik."
+  ],
+  "examples": [
+    "Komplette römische Stadt Falerii Novi 2020 per GPR kartiert (inkl. Tempel, Bad, Wasserleitungen).",
+    "Grüfte und Bestattungen unter Kirchenböden lokalisiert."
+  ],
+  "combos": ["Magnetometrie", "Geoelektrik / ERT"],
+  "limits": "Langsam; schlecht in feuchtem Lehm/Ton (Signal wird verschluckt); erfordert erfahrene Interpretation.",
+  "cost": "Hoch beim Gerät; meist über Dienstleister/Uni."
+}

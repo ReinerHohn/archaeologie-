@@ -1,0 +1,22 @@
+{
+  "id": "adna",
+  "title": "Alte DNA (aDNA) & Sediment-DNA",
+  "category": "labor",
+  "impact": 4,
+  "effort": 4,
+  "evidence_level": "A",
+  "what": "Aus Knochen, Zähnen – und sogar aus reinem Bodensediment – lässt sich uralte DNA gewinnen. Sie verrät Verwandtschaft, Herkunft, Migration und sogar die Anwesenheit von Menschen/Tieren an Orten ganz ohne Skelettfund.",
+  "how_new_finds": "Sediment-DNA ist ein echter Gamechanger: Sie weist Bewohner einer Höhle/Schicht nach, wo keine Knochen liegen – und deckt komplette Wanderungs- und Besiedlungsgeschichten neu auf.",
+  "how_to": [
+    "Proben unter strengen Kontaminationsvorkehrungen entnehmen (Handschuhe, steril).",
+    "Im spezialisierten aDNA-Labor sequenzieren und bioinformatisch auswerten.",
+    "Ergebnisse mit Datierung und Fundkontext verschneiden."
+  ],
+  "examples": [
+    "Denisova-Mensch primär über DNA (später Sediment-DNA) charakterisiert.",
+    "Großräumige Rekonstruktion bronzezeitlicher Migrationen nach Europa."
+  ],
+  "combos": ["Radiokarbon & Dendrochronologie", "Isotopenanalyse"],
+  "limits": "DNA zerfällt (Klima!); hohe Kontaminationsgefahr; nur wenige Speziallabore; teuer.",
+  "cost": "Hoch; Forschungslabor zwingend."
+}

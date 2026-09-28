@@ -1,0 +1,22 @@
+{
+  "id": "ki-bildklassifikation",
+  "title": "KI-Bilderkennung auf Luft-/Satelliten-/LiDAR-Daten",
+  "category": "modellierung",
+  "impact": 4,
+  "effort": 3,
+  "evidence_level": "B",
+  "what": "Convolutional Neural Networks werden darauf trainiert, archäologische Formen (Grabhügel, Kreisgräben, Plattformen, Wracks) in großen Bild- und Höhendatensätzen automatisch zu erkennen – der Computer 'sichtet' Tausende Quadratkilometer statt des Menschen.",
+  "how_new_finds": "Skaliert die stärksten Fernerkundungs-Methoden auf ganze Länder: was ein Mensch in Jahren nicht durchsähe, markiert ein Modell in Stunden – dann prüft der Mensch nur die Kandidaten.",
+  "how_to": [
+    "Trainingsdaten aus bekannten Fundstellen + Labels anlegen (z.B. Grabhügel in LiDAR-Hillshades).",
+    "Objekterkennungs-Modell (CNN/Segmentierung) trainieren und über neue Kacheln laufen lassen.",
+    "Kandidatenliste nach Konfidenz sortieren; Mensch verifiziert Treffer (Human-in-the-loop)."
+  ],
+  "examples": [
+    "Automatische Grabhügel-Erkennung in nationalen LiDAR-Datensätzen (NL/Skandinavien).",
+    "Crowd+KI-Kampagnen zur Wrack- und Strukturdetektion in Satellitenbildern."
+  ],
+  "combos": ["LiDAR", "Satelliten-Fernerkundung", "Predictive Modelling (GIS)", "Citizen Science"],
+  "limits": "Viele Fehlalarme; Modell überträgt Region-Bias; braucht Rechenpower + gelabelte Daten; Verifikation bleibt Pflicht.",
+  "cost": "Niedrig–mittel: offene Frameworks, Hauptkosten sind Labeling + GPU."
+}

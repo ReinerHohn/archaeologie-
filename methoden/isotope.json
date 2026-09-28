@@ -1,0 +1,22 @@
+{
+  "id": "isotope",
+  "title": "Isotopenanalyse (Herkunft & Ernährung)",
+  "category": "labor",
+  "impact": 3,
+  "effort": 3,
+  "evidence_level": "A",
+  "what": "Strontium-, Sauerstoff-, Kohlenstoff- und Stickstoff-Isotope in Zähnen und Knochen spiegeln Trinkwasser und Nahrung wider. Daraus liest man, wo ein Mensch aufwuchs, ob er zuwanderte und wovon er lebte.",
+  "how_new_finds": "Deckt Mobilität und Handelsbeziehungen auf, die in keinem Text stehen – etwa dass Bestattete zugewandert waren. Das verändert die Deutung ganzer Fundplätze.",
+  "how_to": [
+    "Zahnschmelz-/Knochenproben entnehmen.",
+    "Isotopenverhältnisse im Massenspektrometer messen.",
+    "Werte gegen regionale Isotopen-Landkarten (Isoscapes) abgleichen."
+  ],
+  "examples": [
+    "Nachweis, dass Individuen von Stonehenge aus weit entfernten Regionen stammten.",
+    "Rekonstruktion von Ernährungswandel über Zeitschichten."
+  ],
+  "combos": ["Alte DNA (aDNA)", "Radiokarbon & Dendrochronologie"],
+  "limits": "Isoscapes können mehrdeutig sein; Diagenese verfälscht; braucht Referenzdaten der Region.",
+  "cost": "Mittel–hoch; Laborzugang nötig."
+}

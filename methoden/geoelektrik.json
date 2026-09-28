@@ -1,0 +1,23 @@
+{
+  "id": "geoelektrik",
+  "title": "Geoelektrik / Widerstandsmessung (ERT)",
+  "category": "geophysik",
+  "impact": 4,
+  "effort": 3,
+  "evidence_level": "A",
+  "what": "Man schickt schwachen Strom über Elektroden-Spieße in den Boden und misst den elektrischen Widerstand. Mauern, Fundamente, Gruben und Gräben leiten Strom anders als der umgebende Boden – so wird Verborgenes als Widerstandsbild sichtbar. Genau das gesuchte 'mit Sensoren auf elektrische Ströme im Feld hören'.",
+  "how_new_finds": "Zeigt Steinstrukturen (Mauern, Wege, Fundamente) zerstörungsfrei, bevor gegraben wird – ideal um zu entscheiden WO sich Ausgrabung lohnt und um komplette Grundrisse zu kartieren.",
+  "how_to": [
+    "Messgerät (Resistivity Meter) + Elektroden im Raster (0,5–1 m) über die Fläche ziehen.",
+    "Kartierung (schnelle Flächenübersicht) oder Tomografie ERT (Tiefenschnitt bis viele Meter).",
+    "Trockener Boden erhöht Kontrast; nach Regen ist die Auflösung schlechter.",
+    "Rohdaten mit Software (z.B. Res2DInv/freie Tools) in Widerstandskarten invertieren."
+  ],
+  "examples": [
+    "Römische Stadt Viroconium (Wroxeter) – komplette Straßenraster ohne Grabung kartiert.",
+    "Villae rusticae und Gräberfelder in Mitteleuropa als Widerstandsanomalien lokalisiert."
+  ],
+  "combos": ["Magnetometrie", "Bodenradar (GPR)", "Predictive Modelling (GIS)"],
+  "limits": "Langsamer als Magnetometrie; Elektroden müssen Bodenkontakt haben (nicht auf Asphalt/Fels); sehr trockener oder gefrorener Boden verfälscht.",
+  "cost": "Mittel: Gerät im Bereich einiger tausend Euro, oft an Unis/Firmen ausleihbar."
+}

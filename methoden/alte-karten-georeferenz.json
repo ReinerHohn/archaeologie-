@@ -1,0 +1,22 @@
+{
+  "id": "alte-karten-georeferenz",
+  "title": "Alte Karten & historische Luftbilder georeferenzieren",
+  "category": "ki_texte",
+  "impact": 4,
+  "effort": 1,
+  "evidence_level": "A",
+  "what": "Historische Katasterkarten, Urmesstischblätter und alte Luftbilder (auch Aufklärungsbilder des 2. Weltkriegs) werden auf das heutige Koordinatensystem gelegt. So erscheinen längst überbaute Wege, Gebäude, Grabhügel und Kriegsrelikte am exakten Ort.",
+  "how_new_finds": "Extrem hoher Hebel bei minimalem Aufwand: Strukturen, die auf historischen Karten eingezeichnet sind oder auf Altluftbildern (vor Flurbereinigung/Bebauung) sichtbar waren, lassen sich punktgenau wiederfinden.",
+  "how_to": [
+    "Historische Karten/Luftbilder aus Archiven und Portalen laden (viele offen online).",
+    "In GIS über Passpunkte auf moderne Koordinaten entzerren (georeferenzieren).",
+    "Verschwundene Signaturen (Kapellen, Mühlen, Hügel) verorten und im Gelände/LiDAR prüfen."
+  ],
+  "examples": [
+    "WWII-Aufklärungsluftbilder decken heute eingeebnete Grabhügel und Anlagen auf.",
+    "Alte Katasterkarten zeigen Standorte abgegangener Kapellen und Mühlen."
+  ],
+  "combos": ["LiDAR", "Luftbildarchäologie (Cropmarks)", "KI-Ortsnamen-Extraktion (NER)"],
+  "limits": "Alte Karten sind lagemäßig ungenau; Passpunkte nötig; Signaturen deuten will gelernt sein.",
+  "cost": "Sehr niedrig: Karten oft gratis, GIS (QGIS) ist frei."
+}

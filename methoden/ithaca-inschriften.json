@@ -1,0 +1,22 @@
+{
+  "id": "ithaca-inschriften",
+  "title": "KI für Inschriften: Ergänzen, Datieren, Verorten (Ithaca)",
+  "category": "ki_texte",
+  "impact": 3,
+  "effort": 2,
+  "evidence_level": "B",
+  "what": "Neuronale Netze wie DeepMinds 'Ithaca' rekonstruieren lückenhafte antike Inschriften, schätzen ihr Entstehungsdatum und ihren Herkunftsort. Sie schlagen fehlende Zeichen mit Wahrscheinlichkeiten vor und unterstützen Epigraphiker.",
+  "how_new_finds": "Ordnet unklare oder fragmentarische Inschriften Zeit und Raum zu – das kann bekannte Fundorte neu datieren, Fälschungen entlarven und auf bisher übersehene Fundzusammenhänge hinweisen.",
+  "how_to": [
+    "Inschriftentext (auch lückenhaft) in das Modell geben.",
+    "Vorschläge für Datierung, Region und fehlende Zeichen als Wahrscheinlichkeiten prüfen.",
+    "Ergebnisse durch Fachleute gegenlesen – KI als Assistenz, nicht als Urteil."
+  ],
+  "examples": [
+    "Ithaca datiert griechische Inschriften auf wenige Jahrzehnte genau und verbessert Restaurierungen.",
+    "Verortung von Inschriften auf Regionsebene mit hoher Trefferquote."
+  ],
+  "combos": ["KI-Ortsnamen-Extraktion (NER)", "Radiokarbon & Dendrochronologie"],
+  "limits": "Nur so gut wie die Trainingskorpora; auf bestimmte Sprachen/Schriften begrenzt; Expertenkontrolle Pflicht.",
+  "cost": "Sehr niedrig: Forschungstools teils frei online."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "drohnen-photogrammetrie",
+  "title": "Drohnen-Photogrammetrie & eigenes Mini-LiDAR",
+  "category": "fernerkundung",
+  "impact": 3,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "Mit einer Drohne viele überlappende Fotos aufnehmen und per Software zu einem 3D-Geländemodell und Orthofoto verrechnen (Structure-from-Motion). Günstige Alternative, um selbst Mikrorelief und Grabungsflächen zentimetergenau zu dokumentieren.",
+  "how_new_finds": "Erzeugt eigenständig hochaufgelöste Geländemodelle kleiner Areale, in denen sich Wälle, Terrassen und Strukturen abzeichnen – ideal für gezielte Nachuntersuchung von Kandidaten aus Satellit/LiDAR.",
+  "how_to": [
+    "Automatisierten Rasterflug mit 70–80 % Bildüberlappung fliegen.",
+    "Fotos in SfM-Software (z.B. OpenDroneMap/Metashape) zu DGM + Orthomosaik rechnen.",
+    "Relief mit Hillshade betonen; Multispektral- oder Wärmekamera erweitert die Aussage."
+  ],
+  "examples": [
+    "3D-Dokumentation und Neuentdeckung von Terrassensystemen und Grabhügeln.",
+    "Monitoring gefährdeter Fundstellen (Erosion, Raubgrabung) über die Zeit."
+  ],
+  "combos": ["Luftbildarchäologie (Cropmarks)", "Wärmebild-Prospektion", "LiDAR"],
+  "limits": "Photogrammetrie durchdringt Vegetation NICHT (anders als echtes LiDAR); rechtliche Flugbeschränkungen beachten.",
+  "cost": "Niedrig: brauchbare Drohne + freie Software."
+}

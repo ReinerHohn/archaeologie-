@@ -1,0 +1,23 @@
+{
+  "id": "ner-ortsnamen",
+  "title": "KI-Ortsnamen- & Ereignis-Extraktion (NER) aus Quellen",
+  "category": "ki_texte",
+  "impact": 4,
+  "effort": 2,
+  "evidence_level": "B",
+  "what": "Named-Entity-Recognition und LLMs lesen große Textkorpora (Chroniken, Reiseberichte, Zeitungen, antike Autoren) und ziehen automatisch Orte, Personen, Ereignisse und Lagebeschreibungen heraus – inklusive vager Angaben wie 'drei Meilen nördlich des Flusses'.",
+  "how_new_finds": "Verwandelt unstrukturierte Texte in eine durchsuchbare Karte von Erwähnungen. Häufungen und bislang unverortete Nennungen liefern konkrete Such-Kandidaten für Schlachtfelder, Handelsplätze, Villen und Wüstungen.",
+  "how_to": [
+    "Textkorpus zusammenstellen (digitalisierte Quellen, Editionen, Zeitungsarchive).",
+    "NER-/LLM-Pipeline aufsetzen, die Toponyme + relative Lageangaben extrahiert.",
+    "Erwähnungen geokodieren (Gazetteer wie GeoNames/Pleiades) und Unsicherheit mitführen.",
+    "Cluster und einzeln unverortete Nennungen als Feldkandidaten ausgeben."
+  ],
+  "examples": [
+    "Antike Geografien (z.B. Ptolemäus-Koordinaten) neu ausgewertet, um verlorene Orte einzugrenzen.",
+    "Auswertung historischer Berichte zur Lokalisierung antiker Schlachtfelder."
+  ],
+  "combos": ["KI-Handschriftenerkennung (HTR)", "Alte Karten georeferenzieren", "Predictive Modelling (GIS)"],
+  "limits": "Historische Namen wandern/mehrdeutig; LLMs halluzinieren Orte – Belege müssen zurückverfolgbar bleiben.",
+  "cost": "Niedrig: offene Modelle + Gazetteers."
+}

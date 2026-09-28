@@ -1,0 +1,22 @@
+{
+  "id": "radiokarbon-dendro",
+  "title": "Radiokarbon & Dendrochronologie (Datierung)",
+  "category": "labor",
+  "impact": 3,
+  "effort": 2,
+  "evidence_level": "A",
+  "what": "C14-Datierung misst den Zerfall von Radiokohlenstoff in organischem Material; Dendrochronologie datiert Holz jahrgenau über Jahrringmuster. Sie sagen nicht WO, sondern WANN – und machen aus einem Fund erst einen historischen Zusammenhang.",
+  "how_new_finds": "Datierungen decken 'neue' Zusammenhänge auf, wenn Funde sich als viel älter/jünger erweisen als gedacht – Umdatierungen sind selbst Entdeckungen und lenken die weitere Suche.",
+  "how_to": [
+    "Geeignete Proben (Holzkohle, Knochen, Holz) kontaminationsfrei bergen.",
+    "C14 im Labor (AMS) messen und mit Kalibrationskurve umrechnen.",
+    "Holz per Jahrringabfolge gegen Referenzchronologien datieren."
+  ],
+  "examples": [
+    "Dendro-Datierung von Pfahlbausiedlungen auf einzelne Jahre.",
+    "C14-Umdatierungen, die etablierte Chronologien verschoben haben."
+  ],
+  "combos": ["Alte DNA (aDNA)", "Isotopenanalyse", "KI für Inschriften (Ithaca)"],
+  "limits": "Braucht datierbares Material; C14 hat Streuung/Plateaus; Kontamination verfälscht.",
+  "cost": "Mittel je Probe; nur mit Laborzugang."
+}
