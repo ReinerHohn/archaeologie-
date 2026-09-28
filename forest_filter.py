@@ -42,14 +42,8 @@ def to_utm(lons, lats, dst="EPSG:25832"):
     return np.array(x), np.array(y)
 
 
-def fetch_forest(s, w, n, e):
-    q = (f"[out:json][timeout:90];("
-         f'way["landuse"="forest"]({s},{w},{n},{e});'
-         f'relation["landuse"="forest"]({s},{w},{n},{e});'
-         f'way["natural"="wood"]({s},{w},{n},{e});'
-         f'relation["natural"="wood"]({s},{w},{n},{e});'
-         f");out geom;")
-    data = urllib.parse.urlencode({"data": q}).encode()
+def _overpass(query):
+    data = urllib.parse.urlencode({"data": query}).encode()
     last = None
     for ep in OVERPASS_ENDPOINTS:
         for attempt in range(2):
@@ -61,6 +55,41 @@ def fetch_forest(s, w, n, e):
                 last = ex
                 print(f"  Overpass {ep} Versuch {attempt+1}: {ex}")
     raise last
+
+
+def fetch_roads(s, w, n, e):
+    q = (f"[out:json][timeout:120];("
+         f'way["highway"~"^(track|path|service|unclassified|residential|footway)$"]({s},{w},{n},{e});'
+         f");out geom;")
+    osm = _overpass(q)
+    segs = []
+    for el in osm.get("elements", []):
+        g = el.get("geometry") or []
+        for a, b in zip(g[:-1], g[1:]):
+            segs.append((a["lon"], a["lat"], b["lon"], b["lat"]))
+    return segs
+
+
+def seg_dist_min(px, py, ax, ay, bx, by):
+    """Kürzester Abstand Punkt (px,py) zu Strecken A-B (Arrays), Minimum. UTM (m)."""
+    dx = bx - ax
+    dy = by - ay
+    L2 = dx * dx + dy * dy
+    t = np.where(L2 > 0, ((px - ax) * dx + (py - ay) * dy) / np.where(L2 > 0, L2, 1), 0.0)
+    t = np.clip(t, 0.0, 1.0)
+    cx = ax + t * dx
+    cy = ay + t * dy
+    return np.hypot(px - cx, py - cy).min()
+
+
+def fetch_forest(s, w, n, e):
+    q = (f"[out:json][timeout:90];("
+         f'way["landuse"="forest"]({s},{w},{n},{e});'
+         f'relation["landuse"="forest"]({s},{w},{n},{e});'
+         f'way["natural"="wood"]({s},{w},{n},{e});'
+         f'relation["natural"="wood"]({s},{w},{n},{e});'
+         f");out geom;")
+    return _overpass(q)
 
 
 def polygons_from_osm(osm):
@@ -95,6 +124,10 @@ def main(argv=None):
     ap.add_argument("geojson", help="Kandidaten-GeoJSON (EPSG:25832)")
     ap.add_argument("--pad-m", type=float, default=100.0,
                     help="Bounding-Box um X m erweitern (Overpass-Abfrage)")
+    ap.add_argument("--exclude-roads-m", type=float, default=0.0,
+                    help="Kandidaten näher als X m an einem OSM-Weg verwerfen "
+                         "(0=aus; empfohlen ~20 – moderne Weg-Anschnitte sind der "
+                         "Haupt-Fehlerkandidat)")
     args = ap.parse_args(argv)
 
     d = json.loads(pathlib.Path(args.geojson).read_text(encoding="utf-8"))
@@ -132,7 +165,24 @@ def main(argv=None):
             continue
         in_forest |= point_in_ring(px, py, ring)
 
-    kept = [f for f, keep in zip(feats, in_forest) if keep]
+    keep_mask = in_forest.copy()
+
+    if args.exclude_roads_m > 0:
+        print(f"Wege laden (Ausschluss < {args.exclude_roads_m:.0f} m) …")
+        segs = fetch_roads(s, w, n, e)
+        if segs:
+            slon = np.array([g[0] for g in segs] + [g[2] for g in segs])
+            slat = np.array([g[1] for g in segs] + [g[3] for g in segs])
+            sx, sy = to_utm(slon, slat)
+            n_seg = len(segs)
+            ax, ay = sx[:n_seg], sy[:n_seg]
+            bx, by = sx[n_seg:], sy[n_seg:]
+            print(f"{n_seg} Weg-Segmente.")
+            for i in range(len(px)):
+                if keep_mask[i] and seg_dist_min(px[i], py[i], ax, ay, bx, by) < args.exclude_roads_m:
+                    keep_mask[i] = False
+
+    kept = [f for f, keep in zip(feats, keep_mask) if keep]
     out = {"type": "FeatureCollection",
            "crs": {"type": "name", "properties": {"name": "EPSG:25832"}},
            "features": kept}

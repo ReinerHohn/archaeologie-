@@ -135,20 +135,31 @@ python3 forest_filter.py freiburg_region_kandidaten.geojson
 # -> freiburg_region_kandidaten_wald.geojson
 ```
 
+**Moderne Wege ausschließen (`--exclude-roads-m`, wichtig!):** In den Freiburger
+Realdaten lagen **78 % der Wald-Kandidaten ≤ 20 m an einem OSM-Weg** – ein in den
+Hang gebauter Forstweg erzeugt eine „flache Bühne am Hang" und imitiert damit die
+Meiler-Signatur. Wege ausschließen entfernt diese Haupt-Fehlerquelle:
+
+```bash
+python3 forest_filter.py freiburg_region_kandidaten.geojson --exclude-roads-m 20
+```
+
 ### Ergebnis „Raum Freiburg" (Referenzlauf, 6 Kacheln ≈ 24 km²)
 
-Kappler/Rosskopf/Günterstal/Schauinsland-Fuß, `--bench-margin 3 --h-pos 0.2`,
-dann Wald-Filter: **515 Rohkandidaten → 185 im Wald** (93 Meiler-artig,
-92 Pingen-artig) ≈ 8/km². Dichtestes 1-km-Feld: `417_5316` (Kappler Wald, 32).
-Stärkster Meiler-Kandidat: UTM32 418602/5316244 (≈ 47.99431, 7.90891).
-Reproduzieren:
+Kappler/Rosskopf/Günterstal/Schauinsland-Fuß, `--bench-margin 3 --h-pos 0.2`:
+**515 Rohkandidaten → 185 im Wald → 26 im Wald UND abseits Wege** (>20 m;
+15 Meiler-artig, 11 Pingen-artig). Der Wald- plus Wege-Filter siebt also die
+klaren Fehlerquellen (Talboden, Siedlung, Forstweg-Anschnitte) aus. Reproduzieren:
 
 ```bash
 python3 fetch_dgm_bw.py --tiles 417,5316 415,5314 419,5318 419,5320 415,5312 417,5312 --out data/freiburg_ost
 python3 lidar_prospect.py data/freiburg_ost/*.xyz --bench-margin 3 --h-pos 0.2
 # alle *_kandidaten.geojson zusammenführen, dann:
-python3 forest_filter.py <zusammengeführte>.geojson
+python3 forest_filter.py <zusammengeführte>.geojson --exclude-roads-m 20
 ```
+
+Die verbleibenden Kandidaten sind **Hinweise, keine Funde** – erst visuell im
+Hillshade prüfen, dann im Gelände, dann der Denkmalpflege melden.
 
 **Der Detektor liefert Kandidaten, keine Beweise.** Die vollständige Pipeline:
 DGM1 → `lidar_prospect.py` → `forest_filter.py` → in QGIS gegen Altkarten/

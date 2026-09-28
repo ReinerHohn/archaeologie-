@@ -15,3 +15,7 @@ data/
 *_hillshade.png
 *_wald.geojson
 freiburg_*.geojson
+
+# transiente OSM-Abfragen
+gt.json
+roads.json
