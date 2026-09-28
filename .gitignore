@@ -2,3 +2,13 @@ __pycache__/
 *.pyc
 .DS_Store
 .venv/
+
+# LiDAR-Daten (nicht einchecken – gross) und generierte Ausgaben
+*.tif
+*.tiff
+*.xyz
+*.laz
+*.las
+*_kandidaten.geojson
+*_kandidaten.csv
+*_hillshade.png

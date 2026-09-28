@@ -1,0 +1,23 @@
+{
+  "id": "schwarzwald-lidar-sweetspot",
+  "title": "★ Sweet Spot: Schwarzwald-LiDAR nach Meilern & Pingen durchkämmen",
+  "category": "modellierung",
+  "impact": 5,
+  "effort": 1,
+  "evidence_level": "A",
+  "what": "Konkrete Nische für Einzelpersonen mit Code/KI: Baden-Württemberg stellt DGM1 (1 m LiDAR-Geländemodell) KOSTENLOS bereit (opengeodata.lgl-bw.de, Kacheln 2×2 km, GeoTIFF/XYZ, Datenlizenz Deutschland). Der dicht bewaldete Schwarzwald ist damit flächig kaum katalogisiert – unter den Bäumen liegen zu Zehntausenden Köhlerei-Meilerplätze, Bergbau-Pingen, Hohlwege und Wüstungen.",
+  "how_new_finds": "Studien in Pfalz/Harz/Wienerwald fanden per LiDAR 10–50× mehr Meilerplätze als bekannt. Der Schwarzwald ist dafür unterbearbeitet – wer die offenen Daten systematisch (mit einem simplen Detektor) durchkämmt, findet real neue, unverzeichnete Strukturen. 100 % legal, weil man nur ein Höhenmodell ansieht.",
+  "how_to": [
+    "DGM1-Kacheln der Zielregion bei opengeodata.lgl-bw.de laden (gratis).",
+    "Mit lidar_prospect.py (in diesem Repo) Hillshade + Local-Relief-Model + runde Meiler-/Pingen-Kandidaten erzeugen.",
+    "Kandidaten in QGIS gegen Altkarten/WWII-Luftbilder + textgeminte Wüstungsnamen filtern.",
+    "Aussichtsreiche Punkte mit Drohne/Begehung verifizieren und der Landesdenkmalpflege MELDEN (nicht graben)."
+  ],
+  "examples": [
+    "Flächige Meiler-Kartierungen im Pfälzerwald und Harz (Vielfaches der bekannten Zahl).",
+    "Bergbaurelikte (Pingenzüge, Halden) in Mittelgebirgen per LiDAR neu erfasst."
+  ],
+  "combos": ["LiDAR", "KI-Bildklassifikation", "Alte Karten georeferenzieren", "KI-Ortsnamen-Extraktion (NER)", "Predictive Modelling (GIS)"],
+  "limits": "Nur Strukturen mit Restrelief; Detektor liefert Kandidaten, kein Beweis; Sondeln/Graben ist genehmigungspflichtig (Denkmalschutzgesetz) – Fund melden.",
+  "cost": "Sehr niedrig: DGM1 gratis, Tools frei; Hauptaufwand ist Rechnen + Verifizieren."
+}

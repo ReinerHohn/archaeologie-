@@ -59,6 +59,39 @@ Pflichtfelder: `id, title, category, impact, effort, evidence_level, what`.
 `evidence_level`: **A** belegt/etabliert · **B** vielversprechend · **C** explorativ.
 Danach `python3 build.py` neu ausführen.
 
+## 🎯 Sweet Spot & Werkzeug: `lidar_prospect.py`
+
+Der stärkste Ansatzpunkt für eine Einzelperson mit Code/KI: **offene DGM1-Daten
+(1 m LiDAR-Geländemodell) durchkämmen.** Baden-Württemberg gibt DGM1 **kostenlos**
+ab – über das Open GeoData Portal <https://opengeodata.lgl-bw.de/> in Kacheln
+2 × 2 km (GeoTIFF / ASCII-XYZ / LAZ, Datenlizenz Deutschland). Die rohen
+Punktwolken kosten ~80 €/km² – **die brauchst du nicht**, das fertige DGM1-Raster
+genügt und ist gratis. Der dicht bewaldete **Schwarzwald** ist damit flächig kaum
+katalogisiert: Köhlerei-Meilerplätze, Bergbau-Pingen, Hohlwege und Wüstungen
+liegen dort zu Zehntausenden.
+
+`lidar_prospect.py` ist der erste Pipeline-Schritt: es liest DGM1-Kacheln, rechnet
+**Hillshade + Local-Relief-Model** und meldet **runde Erhebungen (Meiler)** und
+**Vertiefungen (Pingen)** als Punktliste.
+
+```bash
+python3 lidar_prospect.py --demo            # synthetische Kachel, sofort testbar
+python3 lidar_prospect.py --demo --png      # zusätzlich Hillshade-PNG mit Markern
+python3 lidar_prospect.py kachel_dgm1.tif   # echte GeoTIFF-Kachel vom LGL
+python3 lidar_prospect.py *.xyz --png       # XYZ-Kacheln, Bildausgabe
+python3 test_lidar_prospect.py              # Tests (findet die synthetischen Ziele)
+```
+
+Ausgabe je Kachel: `<name>_kandidaten.geojson` + `.csv` (Koordinaten in EPSG:25832
+/ UTM32, direkt in QGIS ladbar) und optional `<name>_hillshade.png`.
+Abhängigkeiten: `numpy` (Pflicht), `rasterio` (für GeoTIFF, optional),
+`Pillow` (für PNG, optional). Parameter (`--bg`, `--h-pos`, `--h-neg`, `--r-min`,
+`--r-max`, `--min-sep`) sind auf subtiles Waldrelief voreingestellt und tunebar.
+
+**Der Detektor liefert Kandidaten, keine Beweise.** Die vollständige Pipeline:
+DGM1 → `lidar_prospect.py` → in QGIS gegen Altkarten/Luftbilder + textgeminte
+Wüstungsnamen filtern → mit Drohne/Begehung prüfen → **der Denkmalpflege melden.**
+
 ## Hinweis
 
 Wirkung/Aufwand sind Einordnungshilfen, keine harten Messwerte. Und: Feldarbeit,
