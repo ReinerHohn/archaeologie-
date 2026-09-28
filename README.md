@@ -124,9 +124,36 @@ Abhängigkeiten: `numpy` (Pflicht), `rasterio` (für GeoTIFF, optional),
 `Pillow` (für PNG, optional). Parameter (`--bg`, `--h-pos`, `--h-neg`, `--r-min`,
 `--r-max`, `--min-sep`) sind auf subtiles Waldrelief voreingestellt und tunebar.
 
+### Auf Wald filtern: `forest_filter.py` (großer Qualitätshebel)
+
+Meilerplätze liegen im Wald – die meisten Fehlalarme (Feld-, Talboden-,
+Siedlungsrelief) nicht. `forest_filter.py` holt kostenlose OSM-Waldpolygone
+(Overpass) für die Bounding-Box der Kandidaten und behält nur Punkte im Wald:
+
+```bash
+python3 forest_filter.py freiburg_region_kandidaten.geojson
+# -> freiburg_region_kandidaten_wald.geojson
+```
+
+### Ergebnis „Raum Freiburg" (Referenzlauf, 6 Kacheln ≈ 24 km²)
+
+Kappler/Rosskopf/Günterstal/Schauinsland-Fuß, `--bench-margin 3 --h-pos 0.2`,
+dann Wald-Filter: **515 Rohkandidaten → 185 im Wald** (93 Meiler-artig,
+92 Pingen-artig) ≈ 8/km². Dichtestes 1-km-Feld: `417_5316` (Kappler Wald, 32).
+Stärkster Meiler-Kandidat: UTM32 418602/5316244 (≈ 47.99431, 7.90891).
+Reproduzieren:
+
+```bash
+python3 fetch_dgm_bw.py --tiles 417,5316 415,5314 419,5318 419,5320 415,5312 417,5312 --out data/freiburg_ost
+python3 lidar_prospect.py data/freiburg_ost/*.xyz --bench-margin 3 --h-pos 0.2
+# alle *_kandidaten.geojson zusammenführen, dann:
+python3 forest_filter.py <zusammengeführte>.geojson
+```
+
 **Der Detektor liefert Kandidaten, keine Beweise.** Die vollständige Pipeline:
-DGM1 → `lidar_prospect.py` → in QGIS gegen Altkarten/Luftbilder + textgeminte
-Wüstungsnamen filtern → mit Drohne/Begehung prüfen → **der Denkmalpflege melden.**
+DGM1 → `lidar_prospect.py` → `forest_filter.py` → in QGIS gegen Altkarten/
+Luftbilder + textgeminte Wüstungsnamen filtern → mit Drohne/Begehung prüfen →
+**der Denkmalpflege melden.**
 
 ## Hinweis
 

@@ -13,3 +13,5 @@ data/
 *_kandidaten.geojson
 *_kandidaten.csv
 *_hillshade.png
+*_wald.geojson
+freiburg_*.geojson
