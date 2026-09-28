@@ -82,6 +82,42 @@ python3 lidar_prospect.py *.xyz --png       # XYZ-Kacheln, Bildausgabe
 python3 test_lidar_prospect.py              # Tests (findet die synthetischen Ziele)
 ```
 
+### DGM1 automatisch laden: `fetch_dgm_bw.py`
+
+Lädt die kostenlosen DGM1-Kacheln des LGL direkt (Schema aus dem Portal
+zurückentwickelt: `…/data/dgm/dgm1_32_<Ost_km>_<Nord_km>_2_bw.zip`, 2-km-Gitter
+mit **ungeraden Ost-km** und **geraden Nord-km**; jede ZIP enthält vier
+1-km-XYZ-Dateien, EPSG:25832):
+
+```bash
+# per Kachel-Ecken (UTM-km):
+python3 fetch_dgm_bw.py --tiles 417,5316 415,5314 --out data/freiburg_ost
+# per Umkreis um Koordinaten (lat,lon – braucht rasterio für die Projektion):
+python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
+# nur prüfen, welche Kacheln existieren:
+python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --list-only
+```
+
+### Echtes Gelände: die zwei Diskriminatoren
+
+Auf realen Schwarzwald-Hängen flutet ein reiner Relief-Detektor (Bachtäler,
+Felsen, Hangkanten). Zwei Filter machen ihn brauchbar:
+
+- `--amp-max` (Standard 1,5 m): Meiler/Pingen sind **flach** – metertiefe
+  Naturformen fliegen raus.
+- `--bench-margin` (Standard 0 = aus; für Wald **~3**): erzwingt die echte
+  Meiler-Signatur **„flache Bühne AUF einem Hang"** – die Umgebung muss steiler
+  sein als die Platte. Schließt flache Talböden UND gleichmäßige Steilhänge aus.
+
+Beispiel (Wald östlich Freiburg, ~8 km²): ohne Filter >2000 Treffer/km²,
+mit `--bench-margin 3 --h-pos 0.2` **~10–50 plausible Kandidaten/km²** –
+in der Größenordnung bekannter Meilerplatz-Dichten:
+
+```bash
+python3 fetch_dgm_bw.py --tiles 417,5316 415,5314 --out data/freiburg_ost
+python3 lidar_prospect.py data/freiburg_ost/*.xyz --bench-margin 3 --h-pos 0.2 --png
+```
+
 Ausgabe je Kachel: `<name>_kandidaten.geojson` + `.csv` (Koordinaten in EPSG:25832
 / UTM32, direkt in QGIS ladbar) und optional `<name>_hillshade.png`.
 Abhängigkeiten: `numpy` (Pflicht), `rasterio` (für GeoTIFF, optional),

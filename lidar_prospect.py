@@ -181,9 +181,27 @@ def make_demo_tile(res=1.0, n=400, seed=42):
 # ----------------------------------------------------------------------------
 # Detektion
 # ----------------------------------------------------------------------------
+def slope_deg(dem, res):
+    dy, dx = np.gradient(dem, res)
+    return np.degrees(np.arctan(np.hypot(dx, dy)))
+
+
 def detect(tile, bg_m=15.0, smooth_m=2.0, peak_m=4.0,
-           h_pos=0.15, h_neg=0.15, r_min_m=2.0, r_max_m=10.0, min_sep_m=6.0):
-    """Findet rundliche Erhebungen (Meiler) und Vertiefungen (Pingen)."""
+           h_pos=0.15, h_neg=0.15, r_min_m=2.0, r_max_m=10.0, min_sep_m=6.0,
+           amp_max=1.5, flat_deg=12.0, bench_margin=0.0):
+    """Findet rundliche Erhebungen (Meiler) und Vertiefungen (Pingen).
+
+    Für echtes (Steil-)Gelände Diskriminatoren, sonst ertrinkt man in
+    Bachtälern/Felsen/Hangkanten – oder auf flachen Talböden im Rauschen:
+      * amp_max: Amplituden-BAND [h_pos..amp_max] – Meiler/Pingen sind FLACH
+        (~0,2–0,8 m), nicht metertiefe Naturformen.
+      * flat_deg: der Kandidat muss LOKAL FLACH sein (Meilerplatte = in den Hang
+        gebaute ebene Bühne).
+      * bench_margin (>0 aktiviert): die UMGEBUNG muss um mind. so viele Grad
+        steiler sein als die Platte -> „flache Bühne AUF einem Hang". Schließt
+        flache Talböden UND gleichmäßige Steilhänge aus (die echte Meiler-
+        Signatur). Für Wald-Hänge ~3° sinnvoll; 0 = aus.
+    """
     dem = tile.dem
     res = tile.res
     filled = np.where(np.isnan(dem), np.nanmedian(dem), dem)
@@ -192,11 +210,18 @@ def detect(tile, bg_m=15.0, smooth_m=2.0, peak_m=4.0,
     if smooth_m > 0:
         lrm = box_mean(lrm, max(1, int(round(smooth_m / res))))
 
+    # lokale Ebenheit: mittlere Hangneigung im Umkreis des Kandidaten
+    slp = slope_deg(filled, res)
+    r_max = max(1, int(round(r_max_m / res)))
+    flat = box_mean(slp, r_max)
+    valid = (~np.isnan(dem)) & (flat <= flat_deg)
+    if bench_margin > 0:
+        ring = box_mean(slp, 3 * r_max)           # breitere Umgebung
+        valid &= (ring - flat) >= bench_margin     # Umgebung deutlich steiler
+
     rw = max(1, int(round(peak_m / res)))
     r_min = max(1, int(round(r_min_m / res)))
-    r_max = max(r_min, int(round(r_max_m / res)))
     min_sep = max(1, int(round(min_sep_m / res)))
-    valid = ~np.isnan(dem)
     # Randstreifen ausblenden: dort ist das LRM-Hintergrundfilter unzuverlaessig
     # (Integralbild-Clamping) -> sonst Fehlalarm-Flut an den Kachelkanten.
     margin = max(1, int(round(bg_m / res)))
@@ -210,6 +235,8 @@ def detect(tile, bg_m=15.0, smooth_m=2.0, peak_m=4.0,
         cand = []
         for r, c in zip(rows, cols):
             v = float(field[r, c])
+            if v > amp_max:                       # zu groß = Naturform (Graben/Fels)
+                continue
             rad = _estimate_radius(field, r, c, v, r_max + 2)
             if r_min <= rad <= r_max:
                 cand.append((abs(v), r, c, rad, kind))
@@ -296,7 +323,9 @@ def write_outputs(hits, tile, stem, want_png):
 
 def process(tile, stem, args):
     hits, _ = detect(tile, bg_m=args.bg, h_pos=args.h_pos, h_neg=args.h_neg,
-                     r_min_m=args.r_min, r_max_m=args.r_max, min_sep_m=args.min_sep)
+                     r_min_m=args.r_min, r_max_m=args.r_max, min_sep_m=args.min_sep,
+                     amp_max=args.amp_max, flat_deg=args.flat_deg,
+                     bench_margin=args.bench_margin)
     n_m = sum(h["type"] == "meiler" for h in hits)
     n_p = sum(h["type"] == "pinge" for h in hits)
     print(f"  {len(hits)} Kandidaten  ({n_m} Meiler-artig, {n_p} Pingen-artig)")
@@ -319,6 +348,12 @@ def build_argparser():
     ap.add_argument("--r-max", dest="r_max", type=float, default=10.0, help="Max-Radius (m)")
     ap.add_argument("--min-sep", dest="min_sep", type=float, default=6.0,
                     help="Mindestabstand zwischen Kandidaten (m)")
+    ap.add_argument("--amp-max", dest="amp_max", type=float, default=1.5,
+                    help="max. Amplitude (m) – größer = Naturform, verworfen")
+    ap.add_argument("--flat-deg", dest="flat_deg", type=float, default=12.0,
+                    help="max. lokale Hangneigung (Grad) am Kandidaten")
+    ap.add_argument("--bench-margin", dest="bench_margin", type=float, default=0.0,
+                    help="Umgebung muss um X Grad steiler sein (Bühne am Hang); 0=aus, Wald~3")
     return ap
 
 

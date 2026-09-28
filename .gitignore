@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 
 # LiDAR-Daten (nicht einchecken – gross) und generierte Ausgaben
+data/
 *.tif
 *.tiff
 *.xyz
