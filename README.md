@@ -161,9 +161,31 @@ python3 forest_filter.py <zusammengeführte>.geojson --exclude-roads-m 20
 Die verbleibenden Kandidaten sind **Hinweise, keine Funde** – erst visuell im
 Hillshade prüfen, dann im Gelände, dann der Denkmalpflege melden.
 
+### Gegen das amtliche Denkmalverzeichnis abgleichen: `denkmal_check.py`
+
+„Was davon ist längst bekannt?" – gleicht die Kandidaten gegen den offenen WMS
+des **Landesamts für Denkmalpflege BW** ab (archäologische Kulturdenkmale +
+Grabungsschutzgebiete, `owsproxy.lgl-bw.de`, EPSG:25832). Markiert je Kandidat
+`amtlich_bekannt` und holt bei Treffern den Klartext (GetFeatureInfo):
+
+```bash
+python3 denkmal_check.py freiburg_region_kandidaten.geojson --radius-m 25
+# -> freiburg_region_kandidaten_denkmalabgleich.geojson
+```
+
+Ergebnis im Raum Freiburg: nur **6 % (33/515)** liegen ≤ 25 m an einem
+eingetragenen Denkmal – und die verteilen sich auf **wenige Typen** (v. a. die
+frühneuzeitliche **Schanzenlinie** Rosskopf–Dreisamtal–Sternwald ~1700,
+Kirche+Friedhof, Gewerbekanal, „Wildbad"). Die eingetragenen Denkmale liegen
+also fast alle woanders als unsere Waldkandidaten. **Wichtig:** „nicht im
+Verzeichnis" heißt NICHT automatisch „neue Entdeckung" – es kann genauso ein
+Fehlalarm (Weg-Bank, Naturform) sein. Der Abgleich trennt nur *bekannt* von
+*unbekannt*, nicht *echt* von *falsch*.
+
 **Der Detektor liefert Kandidaten, keine Beweise.** Die vollständige Pipeline:
-DGM1 → `lidar_prospect.py` → `forest_filter.py` → in QGIS gegen Altkarten/
-Luftbilder + textgeminte Wüstungsnamen filtern → mit Drohne/Begehung prüfen →
+DGM1 → `lidar_prospect.py` → `forest_filter.py` (Wald + Wege) →
+`denkmal_check.py` (Bekanntes markieren) → in QGIS gegen Altkarten/Luftbilder +
+textgeminte Wüstungsnamen filtern → mit Drohne/Begehung prüfen →
 **der Denkmalpflege melden.**
 
 ## Hinweis

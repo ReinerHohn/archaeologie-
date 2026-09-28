@@ -19,3 +19,4 @@ freiburg_*.geojson
 # transiente OSM-Abfragen
 gt.json
 roads.json
+*_denkmalabgleich.geojson
