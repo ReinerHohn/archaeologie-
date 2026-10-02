@@ -22,8 +22,16 @@ import sys
 import urllib.request
 import zipfile
 
-BASE = "https://opengeodata.lgl-bw.de/data/dgm"
+ROOT = "https://opengeodata.lgl-bw.de"
 UA = {"User-Agent": "Mozilla/5.0 (archaeologie lidar_prospect)"}
+
+# product -> (URL-Pfad, Dateinamen-Präfix, zu entpackende Endungen)
+PRODUCTS = {
+    "dgm1":   ("/data/dgm",    "dgm1",     (".xyz", ".txt", ".asc")),
+    "dgm025": ("/data/dgm025", "dgm025",   (".tif", ".tiff")),
+    "dom1":   ("/data/dom1",   "dom1",     (".xyz", ".txt", ".asc", ".tif")),
+    "dop20":  ("/data/dop20",  "dop20rgb", (".tif", ".tiff", ".jpg")),
+}
 
 
 def snap_sw(easting_m, northing_m):
@@ -61,12 +69,14 @@ def latlon_to_utm32(lat, lon):
     return xs[0], ys[0]
 
 
-def tile_name(e_sw, n_sw):
-    return f"dgm1_32_{e_sw}_{n_sw}_2_bw.zip"
+def tile_name(e_sw, n_sw, product="dgm1"):
+    _, prefix, _ = PRODUCTS[product]
+    return f"{prefix}_32_{e_sw}_{n_sw}_2_bw.zip"
 
 
-def tile_url(e_sw, n_sw):
-    return f"{BASE}/{tile_name(e_sw, n_sw)}"
+def tile_url(e_sw, n_sw, product="dgm1"):
+    path = PRODUCTS[product][0]
+    return f"{ROOT}{path}/{tile_name(e_sw, n_sw, product)}"
 
 
 def head_ok(url):
@@ -78,15 +88,16 @@ def head_ok(url):
         return False, str(e)
 
 
-def download_and_unzip(e_sw, n_sw, outdir):
-    url = tile_url(e_sw, n_sw)
+def download_and_unzip(e_sw, n_sw, outdir, product="dgm1"):
+    url = tile_url(e_sw, n_sw, product)
+    exts = PRODUCTS[product][2]
     req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=120) as r:
+    with urllib.request.urlopen(req, timeout=300) as r:
         blob = r.read()
     names = []
     with zipfile.ZipFile(io.BytesIO(blob)) as z:
         for info in z.infolist():
-            if info.filename.lower().endswith((".xyz", ".txt", ".asc")):
+            if info.filename.lower().endswith(exts):
                 target = outdir / pathlib.Path(info.filename).name
                 target.write_bytes(z.read(info))
                 names.append(target)
@@ -119,33 +130,35 @@ def main(argv=None):
     ap.add_argument("--center", help="'lat,lon' (WGS84), z.B. 47.995,7.852")
     ap.add_argument("--radius-km", type=float, default=2.0, help="Radius um --center (km)")
     ap.add_argument("--out", default="data/dgm_bw", help="Zielverzeichnis")
+    ap.add_argument("--product", default="dgm1", choices=sorted(PRODUCTS),
+                    help="Produkt: dgm1 (1m XYZ), dgm025 (0.25m GeoTIFF), dom1, dop20 (Luftbild)")
     ap.add_argument("--list-only", action="store_true", help="nur URLs prüfen, nicht laden")
     args = ap.parse_args(argv)
 
+    prod = args.product
     tiles = collect_tiles(args)
-    print(f"{len(tiles)} Kachel(n) im 2-km-Gitter:")
+    print(f"{len(tiles)} Kachel(n) im 2-km-Gitter (Produkt {prod}):")
     outdir = pathlib.Path(args.out)
     if not args.list_only:
         outdir.mkdir(parents=True, exist_ok=True)
 
-    total_xyz = []
+    total = []
     for e_sw, n_sw in tiles:
-        url = tile_url(e_sw, n_sw)
+        url = tile_url(e_sw, n_sw, prod)
         if args.list_only:
             ok, info = head_ok(url)
             mb = f"{info/1e6:.1f} MB" if isinstance(info, int) and info else info
             print(f"  [{'OK ' if ok else 'FEHLT'}] {url}  {mb if ok else ''}")
             continue
         try:
-            xyz = download_and_unzip(e_sw, n_sw, outdir)
-            total_xyz += xyz
-            print(f"  [OK] {tile_name(e_sw, n_sw)} -> {len(xyz)} XYZ-Datei(en)")
+            files = download_and_unzip(e_sw, n_sw, outdir, prod)
+            total += files
+            print(f"  [OK] {tile_name(e_sw, n_sw, prod)} -> {len(files)} Datei(en)")
         except Exception as e:
-            print(f"  [FEHLER] {tile_name(e_sw, n_sw)}: {e}")
+            print(f"  [FEHLER] {tile_name(e_sw, n_sw, prod)}: {e}")
 
     if not args.list_only:
-        print(f"\n{len(total_xyz)} XYZ-Dateien in {outdir}/")
-        print(f"Weiter mit:  python3 lidar_prospect.py {outdir}/*.xyz --png")
+        print(f"\n{len(total)} Datei(en) in {outdir}/")
 
 
 if __name__ == "__main__":

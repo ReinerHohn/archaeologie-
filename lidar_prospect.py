@@ -331,7 +331,7 @@ def process(tile, stem, args):
     print(f"  {len(hits)} Kandidaten  ({n_m} Meiler-artig, {n_p} Pingen-artig)")
     written = write_outputs(hits, tile, stem, args.png)
     print("  geschrieben: " + ", ".join(written))
-    return hits
+    return hits, tile
 
 
 def build_argparser():
@@ -354,6 +354,8 @@ def build_argparser():
                     help="max. lokale Hangneigung (Grad) am Kandidaten")
     ap.add_argument("--bench-margin", dest="bench_margin", type=float, default=0.0,
                     help="Umgebung muss um X Grad steiler sein (Bühne am Hang); 0=aus, Wald~3")
+    ap.add_argument("--merge", metavar="PFAD",
+                    help="alle Kacheln zusätzlich in EINE GeoJSON zusammenführen")
     return ap
 
 
@@ -366,9 +368,27 @@ def main(argv=None):
         return
     if not args.tiles:
         build_argparser().error("Keine Kacheln angegeben (oder --demo).")
+    merged = []
+    crs = "EPSG:25832"
     for path in args.tiles:
         print(f"{path}:")
-        process(load_tile(path), pathlib.Path(path).stem, args)
+        stem = pathlib.Path(path).stem
+        hits, tile = process(load_tile(path), stem, args)
+        crs = tile.crs
+        for h in hits:
+            merged.append({
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [h["x"], h["y"]]},
+                "properties": {"type": h["type"], "amplitude_m": h["amplitude_m"],
+                               "radius_m": h["radius_m"], "tile": stem},
+            })
+    if args.merge:
+        gj = {"type": "FeatureCollection",
+              "crs": {"type": "name", "properties": {"name": crs}},
+              "features": merged}
+        pathlib.Path(args.merge).write_text(json.dumps(gj, ensure_ascii=False),
+                                            encoding="utf-8")
+        print(f"\nZusammengeführt: {len(merged)} Kandidaten -> {args.merge}")
 
 
 if __name__ == "__main__":

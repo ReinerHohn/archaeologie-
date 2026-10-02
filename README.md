@@ -98,6 +98,19 @@ python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
 python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --list-only
 ```
 
+### Alles in einem: `pipeline.py`
+
+Die ganze Kette (laden → detektieren → Wald/Wege-Filter → amtlicher
+Denkmal-Abgleich → Rangliste der *unbekannten* Kandidaten) in einem Kommando:
+
+```bash
+python3 pipeline.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
+```
+
+Produkte: `fetch_dgm_bw.py --product` kann `dgm1` (1 m XYZ), `dgm025`
+(0,25 m GeoTIFF – zum Nachprüfen einzelner Kandidaten), `dom1` und `dop20`
+(Luftbild-Orthofoto, zum Unterscheiden „modern vs. alt") laden.
+
 ### Echtes Gelände: die zwei Diskriminatoren
 
 Auf realen Schwarzwald-Hängen flutet ein reiner Relief-Detektor (Bachtäler,
