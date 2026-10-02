@@ -137,6 +137,21 @@ Abhängigkeiten: `numpy` (Pflicht), `rasterio` (für GeoTIFF, optional),
 `Pillow` (für PNG, optional). Parameter (`--bg`, `--h-pos`, `--h-neg`, `--r-min`,
 `--r-max`, `--min-sep`) sind auf subtiles Waldrelief voreingestellt und tunebar.
 
+### Rechteckige/lineare Erdwerke: `earthwork_detect.py`
+
+`lidar_prospect.py` findet nur RUNDE Formen (Meiler/Pingen). Für **Wälle,
+Gräben-Ränder und rechteckige Umwallungen** (z. B. Schanzen/Redouten, Burgställe,
+Wasserbecken) gibt es `earthwork_detect.py`: es findet schmale, lange Grate im
+Local-Relief-Model (Wall-Segmente) und erkennt dicht stehende, verschieden
+orientierte Segmente bzw. hohle Umriss-Komponenten als **Umwallungen**.
+
+```bash
+python3 earthwork_detect.py data/freiburg_ost/*.xyz --png
+```
+
+Validiert am Rosskopf-Erdwerk: der Detektor zeichnet die rechteckige Doppel-
+Umwallung sauber nach (die `lidar_prospect` nur zufällig am Rand streifte).
+
 ### Auf Wald filtern: `forest_filter.py` (großer Qualitätshebel)
 
 Meilerplätze liegen im Wald – die meisten Fehlalarme (Feld-, Talboden-,

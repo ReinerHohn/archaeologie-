@@ -20,3 +20,5 @@ freiburg_*.geojson
 gt.json
 roads.json
 *_denkmalabgleich.geojson
+*_erdwerke.geojson
+*_erdwerke.png
