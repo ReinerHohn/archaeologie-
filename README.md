@@ -135,6 +135,23 @@ python3 discovery_score.py --data data/freiburg_ost --name freiburg --figures
 # -> freiburg_funde.geojson + .csv (nach Score) + docs/..._kontaktbogen.png
 ```
 
+### Kalibrieren statt raten: `validate.py`
+
+Macht aus geschätzten Schwellen **gemessene**: gegen ein gelabeltes DGM
+(Ground-Truth-Punkte/Polygone) einen Sweep über `--h-pos`/`--bench-margin` fahren
+und Precision/Recall/F1 + beste Einstellung ausgeben.
+
+```bash
+python3 validate.py --demo                               # synthetischer Selbsttest
+python3 validate.py --dem kachel.xyz --truth wahrheit.geojson   # echter Sweep
+python3 validate.py --candidates funde.geojson --truth wahrheit.geojson --max-m 15
+```
+
+Der Selbsttest zeigt ehrlich: Recall lässt sich leicht auf ~1.0 bringen, die
+**Precision ist der Engpass** (Störer wie Baumwurf) — was den Mask-R-CNN-Ansatz
+aus `docs/ground_truth_datasets.md` motiviert. Ground-Truth-Polygone (z. B. die
+RCH-Datensätze) lassen sich direkt als `--truth` einspeisen.
+
 ### Alles in einem: `pipeline.py`
 
 Die ganze Kette (laden → detektieren → Wald/Wege-Filter → amtlicher

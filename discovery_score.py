@@ -182,13 +182,22 @@ def main(argv=None):
     except Exception as ex:
         print("  (Denkmal-WMS übersprungen:", ex, ")")
 
-    # --- historische Hinweise ---
+    # --- historische Hinweise (OSM-Flurnamen/historic + Wikidata-Heritage) ---
     hints = fetch_hints(s, w, n, e)
     hints_xy = []
     if hints:
         hx, hy = ff.to_utm([h[0] for h in hints], [h[1] for h in hints])
         hints_xy = list(zip(hx, hy, [h[2] for h in hints]))
-    print(f"  Hinweise (Flurnamen/historic): {len(hints_xy)}")
+    try:  # Wikidata-Wissen (Burg/Ruine/Schanze/Wüstung/Kloster) dazunehmen
+        import geo_clues as gc
+        wd = [c for c in gc.sparql_box(s, w, n, e) if gc.is_heritage(c)]
+        if wd:
+            wx, wy = ff.to_utm([c["lon"] for c in wd], [c["lat"] for c in wd])
+            hints_xy += list(zip(wx, wy, [c["label"] for c in wd]))
+            print(f"  + Wikidata-Heritage: {len(wd)}")
+    except Exception as ex:
+        print("  (Wikidata-Hinweise übersprungen:", ex, ")")
+    print(f"  Hinweise gesamt: {len(hints_xy)}")
 
     # --- Fusion: filtern + scoren ---
     kept = []
