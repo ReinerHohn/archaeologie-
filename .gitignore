@@ -31,3 +31,4 @@ docs/literatur_*.json
 docs/geo_clues_*.md
 klassifiziert.geojson
 model_meiler.json
+*_sweetspots.geojson

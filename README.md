@@ -98,6 +98,27 @@ python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
 python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --list-only
 ```
 
+### Sweet-Spots „wo andere nichts fanden": `sweet_spots.py`
+
+Fusioniert **mehrere offene APIs** (Wikidata, Wikipedia, OSM/Overpass,
+iDAI.gazetteer des DAI) zu einer Liste dokumentierter Orte und zeigt die
+**Lücke**: Orte, die in Quellen belegt sind, aber in **keinem amtlichen
+Register** (LAD archäologisch + Bau/Kunst) stehen — priorisiert nach selten
+erfassten Typen (Wüstung, Burgstall, Schanze, Ringwall, Grabhügel, Landgraben,
+römische Fundstelle).
+
+```bash
+python3 sweet_spots.py --bbox 47.85 7.60 48.15 8.00 --name breisgau
+```
+
+Testlauf Breisgau: aus ~2900 Wikidata- + ~1800 OSM-Objekten → **40 Sweet-Spots**
+(dokumentiert, nicht registriert), u. a. *Wallburg Kegelriss*, *Burgrest
+Kastelberg*, mehrere *Samian-Ware*-Fundstellen (römische Terra Sigillata),
+*„Am Burgstall"*, *Landgraben*. Snapshot in `docs/sweetspots_breisgau.md`.
+**Ehrlich:** „nicht im Register" ≠ „noch nie gefunden" — es sind *dokumentierte*
+Orte (daher in Wikidata/OSM), aber ohne amtlichen Denkmalschutz/genaue Verortung
+⇒ ideale Ziele für LiDAR-Prüfung + Meldung.
+
 ### Literatur & Wissen durchforsten + Puzzleteile zusammenlegen
 
 Funde entstehen nicht nur aus Relief, sondern aus dem **Zusammenlegen von
