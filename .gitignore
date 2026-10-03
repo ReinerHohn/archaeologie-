@@ -22,3 +22,6 @@ roads.json
 *_denkmalabgleich.geojson
 *_erdwerke.geojson
 *_erdwerke.png
+*_funde.geojson
+*_funde.csv
+docs/*_kontaktbogen.png

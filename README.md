@@ -98,6 +98,24 @@ python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
 python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --list-only
 ```
 
+### Daten-Fusion: `discovery_score.py` (versteckte Funde aufspüren)
+
+Der eigentliche Hebel für *versteckte* Archäologie ist **Daten-Fusion**: ein
+Kandidat ist heiß, wenn mehrere unabhängige Quellen zusammenfallen. Das Werkzeug
+fasst sie zu einem Score zusammen und gibt eine **Rangliste** aus:
+
+```
+Erdwerk (Umwallung/Ring im LiDAR)
+ × im Wald  × nicht an moderner Straße  × NICHT im amtlichen Verzeichnis
+ + Bonus bei historischem Hinweis in der Nähe (Flurname „Burgstall/Schanze/
+   Ringwall/Wüstung…" oder OSM-historic)
+```
+
+```bash
+python3 discovery_score.py --data data/freiburg_ost --name freiburg --figures
+# -> freiburg_funde.geojson + .csv (nach Score) + docs/..._kontaktbogen.png
+```
+
 ### Alles in einem: `pipeline.py`
 
 Die ganze Kette (laden → detektieren → Wald/Wege-Filter → amtlicher
