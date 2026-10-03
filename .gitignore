@@ -25,3 +25,7 @@ roads.json
 *_funde.geojson
 *_funde.csv
 docs/*_kontaktbogen.png
+*_hinweise.geojson
+docs/literatur_*.md
+docs/literatur_*.json
+docs/geo_clues_*.md

@@ -98,6 +98,25 @@ python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
 python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --list-only
 ```
 
+### Literatur & Wissen durchforsten + Puzzleteile zusammenlegen
+
+Funde entstehen nicht nur aus Relief, sondern aus dem **Zusammenlegen von
+Text- und Raumquellen**:
+
+- **`literature_mine.py`** — durchsucht wissenschaftliche Literatur (OpenAlex,
+  offen) nach Methoden **und offenen, gelabelten Datensätzen** (Ground Truth zum
+  Kalibrieren). Siehe `docs/ground_truth_datasets.md`.
+  ```bash
+  python3 literature_mine.py "charcoal hearths LiDAR" --datasets
+  ```
+- **`geo_clues.py`** — holt georeferenziertes Wissen (Wikidata + Wikipedia:
+  Burgen, Ruinen, Schanzen, Wüstungen, Klöster …) und **fusioniert es räumlich**
+  mit den LiDAR-Kandidaten → „Puzzle-Matches" (Textquelle ↔ Anomalie).
+  ```bash
+  python3 geo_clues.py --from freiburg_funde.geojson --fuse freiburg_funde.geojson --name freiburg
+  ```
+  Beispiel-Match im Testlauf: **Burg Kybfelsen ↔ Ring-Erdwerk 134 m daneben.**
+
 ### Daten-Fusion: `discovery_score.py` (versteckte Funde aufspüren)
 
 Der eigentliche Hebel für *versteckte* Archäologie ist **Daten-Fusion**: ein
