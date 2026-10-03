@@ -135,6 +135,23 @@ python3 discovery_score.py --data data/freiburg_ost --name freiburg --figures
 # -> freiburg_funde.geojson + .csv (nach Score) + docs/..._kontaktbogen.png
 ```
 
+### Precision-Booster: `classify_candidates.py`
+
+Der Flaschenhals ist die Precision (viele Fehlalarme). Dieser Klassifikator lernt
+aus **Formmerkmalen** (Innen-Ebenheit, Rauheit, „peaked" = spitz vs. flach,
+Symmetrie, Rand, Größe, Hang-Kontext) echte Plattformen von Störern (Baumwurf) zu
+trennen — Logistische Regression in reinem numpy (kein sklearn nötig).
+
+```bash
+python3 classify_candidates.py --demo                        # Train Szene A, Test Szene B
+python3 classify_candidates.py --train dgm.xyz --truth gt.geojson --out model.json
+python3 classify_candidates.py --apply dgm.xyz --candidates c.geojson --model model.json
+```
+
+Auf dem synthetischen Benchmark (Training/Test getrennt) hebt er **Precision
+0,26 → 0,92 bei Recall 1,0** (F1 0,41 → 0,96; Fehlalarme 35 → 1). Mit echten
+Labels (RCH-Polygone) direkt nachtrainierbar.
+
 ### Kalibrieren statt raten: `validate.py`
 
 Macht aus geschätzten Schwellen **gemessene**: gegen ein gelabeltes DGM

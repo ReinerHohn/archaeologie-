@@ -29,3 +29,5 @@ docs/*_kontaktbogen.png
 docs/literatur_*.md
 docs/literatur_*.json
 docs/geo_clues_*.md
+klassifiziert.geojson
+model_meiler.json
