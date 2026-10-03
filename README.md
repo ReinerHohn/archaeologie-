@@ -98,6 +98,24 @@ python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --out data/freiburg
 python3 fetch_dgm_bw.py --center 47.995,7.852 --radius-km 3 --list-only
 ```
 
+### Die Brücke Text → Relief: `verify_leads.py`
+
+Schließt den Kreis: nimmt die Sweet-Spots, lädt an ihren Koordinaten die
+DGM1-Kacheln und prüft automatisch mit `earthwork_detect`/`lidar_prospect`, ob am
+dokumentierten Ort noch ein Erdwerk im Gelände steckt — **aus jedem Textlead wird
+eine Relief-Antwort (JA Typ/Abstand · nein)**.
+
+```bash
+python3 verify_leads.py --leads breisgau_sweetspots.geojson --top 6 --out data/leads
+```
+
+Testlauf (Top-6 Breisgau): **Burgrest Kastelberg** → klares rechteckiges,
+umwalltes Erdwerk am Punkt (Ring 6 m); **Rödelsburg** → Spornburg-Relief (Ring
+18 m); **Wallburg Kegelriss** → langer Wall (52 m). Die Roman-/Tallagen
+(Samian-Ware, Kirchzarten) zeigen nur schwache, mehrdeutige Rundformen in
+verrauschten Fenstern — ehrlich erwartbar (Oberflächenfunde/Siedlung = kein
+klares Relief). Die Zahl der Anomalien im Fenster dient als Rausch-Indikator.
+
 ### Sweet-Spots „wo andere nichts fanden": `sweet_spots.py`
 
 Fusioniert **mehrere offene APIs** (Wikidata, Wikipedia, OSM/Overpass,
