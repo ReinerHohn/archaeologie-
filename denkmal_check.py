@@ -28,17 +28,21 @@ from PIL import Image
 import io
 
 WMS = "https://owsproxy.lgl-bw.de/owsproxy/ows/WMS_LAD_Archaeologische_Kulturdenkmale_BW"
+# Bau- & Kunstdenkmale (stehende Denkmale wie Burgruinen) – zweiter Layer, da
+# archäologisches Register z.B. die Kyburg NICHT führt.
+WMS_BK = "https://owsproxy.lgl-bw.de/owsproxy/ows/WMS_LAD_Kulturdenkmale_Bau_Kunstdenkmalpflege"
 UA = {"User-Agent": "archaeologie-lidar/1.0 (research; monument cross-check)"}
 LYR_DENK = "v_archaeologie_kulturdenkmale"
 LYR_GSG = "v_archaeologie_grabungsschutzgebiete"
+LYR_BK = "v_bau_kunstdenkmalpflege_kulturdenkmale"
 
 
-def wms_getmap(layer, minx, miny, maxx, maxy, w, h):
+def wms_getmap(layer, minx, miny, maxx, maxy, w, h, base=WMS):
     p = {"SERVICE": "WMS", "VERSION": "1.3.0", "REQUEST": "GetMap",
          "LAYERS": layer, "STYLES": "", "CRS": "EPSG:25832",
          "BBOX": f"{minx},{miny},{maxx},{maxy}", "WIDTH": w, "HEIGHT": h,
          "FORMAT": "image/png", "TRANSPARENT": "TRUE"}
-    url = WMS + "?" + urllib.parse.urlencode(p)
+    url = base + "?" + urllib.parse.urlencode(p)
     r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=90).read()
     if r[:8] != b"\x89PNG\r\n\x1a\n":
         raise RuntimeError("WMS lieferte kein PNG: " + r[:200].decode("utf-8", "replace"))
@@ -87,11 +91,15 @@ def main(argv=None):
         w, h = int(w * sc), int(h * sc)
     print(f"WMS GetMap {w}x{h} px über bbox …")
     denk = wms_getmap(LYR_DENK, minx, miny, maxx, maxy, w, h)
+    try:  # Bau-/Kunstdenkmale dazunehmen (stehende Denkmale, z.B. Burgruinen)
+        denk = denk | wms_getmap(LYR_BK, minx, miny, maxx, maxy, w, h, base=WMS_BK)
+    except Exception as ex:
+        print("  (Bau-/Kunstdenkmal-Layer übersprungen:", ex, ")")
     try:
         gsg = wms_getmap(LYR_GSG, minx, miny, maxx, maxy, w, h)
     except Exception:
         gsg = np.zeros_like(denk)
-    print(f"Denkmal-Pixel: {int(denk.sum())} | Grabungsschutz-Pixel: {int(gsg.sum())}")
+    print(f"Denkmal-Pixel (arch.+Bau/Kunst): {int(denk.sum())} | Grabungsschutz-Pixel: {int(gsg.sum())}")
 
     rpx = args.radius_m / ((maxx - minx) / w)
 

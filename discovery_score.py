@@ -87,6 +87,10 @@ def fetch_hints(s, w, n, e):
         lon = el.get("lon") or (el.get("center") or {}).get("lon")
         if lat is None:
             continue
+        # Straßen/Wege ausschließen: deren Name verweist oft nur auf ein ENTFERNTES
+        # Ziel (z.B. 'Waldfahrstraße …-Kyburg') und täuscht einen Hinweis vor.
+        if t.get("highway"):
+            continue
         name = t.get("name", "")
         hist = t.get("historic", "")
         if rx.search(name) or hist in hist_ok:
@@ -163,6 +167,10 @@ def main(argv=None):
         if max(wpx, hpx) > 4000:
             sc = 4000 / max(wpx, hpx); wpx, hpx = int(wpx * sc), int(hpx * sc)
         dmask = dk.wms_getmap(dk.LYR_DENK, minx, miny, maxx, maxy, wpx, hpx)
+        try:  # auch Bau-/Kunstdenkmale (z.B. Burgruinen) gegenprüfen
+            dmask = dmask | dk.wms_getmap(dk.LYR_BK, minx, miny, maxx, maxy, wpx, hpx, base=dk.WMS_BK)
+        except Exception as ex:
+            print("  (Bau-/Kunstdenkmal-Layer übersprungen:", ex, ")")
         rr = args.register_m / ((maxx - minx) / wpx)
         for i in range(len(cands)):
             col = (px[i] - minx) / (maxx - minx) * wpx
